@@ -1,0 +1,43 @@
+{{>navigation}}
+<!-- main content sections -->
+<div class="form_container my-5">
+    <form class="form my-5" action="/register" method="post">
+        <h2 class="subtitle form_title">REGISTRARSE</h2>
+        <div class="form_group">
+            <input type="email" id="email" name="email" class="form_input" placeholder=" " required>
+            <label class="form_label" for="email">Correo electrónico:</label>
+        </div>
+        {{#if error}}
+        <p class="m-0 text-sm-left" style="color:red"><b>{{error}}</b><i class="fa-solid fa-arrow-turn-up px-2"></i></p>
+        {{/if}}
+        <div class="form_group">
+            <input type="text" id="password" name="password" class="form_input" placeholder=" " required>
+            <label class="form_label" for="password">Contraseña:</label>
+        </div>
+        <div class="form_group">  
+            <input type="password" id="rpassword" name="rpassword" class="form_input" placeholder=" " required>
+            <label class="form_label" for="rpassword">Repetir Contraseña:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="first_name" name="first_name" class="form_input" placeholder=" ">
+            <label class="form_label" for="first_name">Nombre/s:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="last_name" name="last_name" class="form_input" placeholder=" ">
+            <label class="form_label" for="last_name">Apellido/s:</label>
+        </div>
+        <div class="form_group">
+            <input type="number" min="13" id="age" name="age" class="form_input" placeholder=" ">
+            <label class="form_label" for="age">Edad:</label>
+        </div>
+        <div class="form_group">
+            <input type="tel" id="phone" name="phone" class="form_input" placeholder=" ">
+            <label class="form_label" for="phone">Teléfono:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="address" name="address" class="form_input" placeholder=" ">
+            <label class="form_label" for="address">Direccion:</label>
+        </div>
+        <button class="form_submit" type="submit">ENVIAR</button>
+    </form>
+</div>

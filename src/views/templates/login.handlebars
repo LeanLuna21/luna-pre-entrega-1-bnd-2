@@ -1,0 +1,32 @@
+{{>navigation}}
+<!-- main content sections -->
+<div class="form_container mt-5">
+    <form class="form my-5" action="/login" method="post">
+        <h2 class="subtitle form_title">INGRESAR</h2>
+        <div class="form_group">
+            <input type="text" id="email" name="email" class="form_input" placeholder=" " required>
+            <label for="email" class="form_label">Correo electrónico:</label>
+            <span class="form_line"></span>
+        </div>
+        <div class="form_group">
+            <input type="password" id="password" name="password" class="form_input" placeholder=" ">
+            <label for="password" class="form_label">Contraseña:</label>
+            <span class="form_line"></span>
+        </div>
+        <button class="form_submit" type="submit">LOG IN</button>
+
+        <p><a class="list-group-item list-group-item-action list-group-item-warning border rounded"
+                href="#">Forgot password?</a></p>
+        <div class="d-flex justify-content-xl-center align-items-center">
+            <p class="dropdown-item bg-dark text-light border-dark rounded w-50 m-0">Ingresar con:</p><a class="w-50"
+                href="/github"><i class="form_submit fa-brands fa-github fa-2xl"></i></a>
+        </div>
+        {{#if error}}
+        <p style="color:red"><b>{{error}}</b></p>
+        {{/if}}
+    </form>
+    <div class="link_container mt-1">
+        <p id="register"><b>¿No tenés cuenta?</b><a href="register" class="form_link">REGISTRARSE AQUI</a></p>
+    </div>
+
+</div>

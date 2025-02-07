@@ -1,0 +1,63 @@
+{{>navigation}}
+
+<article class="comidas">
+    <div class="contenedor_pedidos">
+        <div class="d-flex flex-column my-5">
+            <div class="contenedor-importe-total mx-3 mt-5 mb-2 justify-content-between">
+                <h2 class="mx-3 w-100 d-flex align-items-center justify-content-evenly"> Listado de productos 
+                    <a href="#" role="button" class="btn btn-outline-warning btn-lg">
+                        <i class="fa-solid fa-plus mx-2"> </i>
+                        Nuevo Producto
+                    </a>
+                </h2>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center my-2">
+                <h3 class="subtitle form_title mx-2 w-75 align-self-center">Comidas:</h3>
+                {{#each items}}
+                {{#if (eq category "comidas")}}
+                <div class="lista-pedido form m-2 p-3 w-25">
+                    <div class="card-body d-flex flex-column w-100 h-100 justify-content-between align-items-center">
+                        <div
+                            class="mb-2 pb-3 w-100 h-25 justify-content-between align-items-end border-bottom border-dark rounded">
+                            <h4 class="card-title d-inline m-2">{{title}}</h4>
+                            <a href="/edit-product/{{_id}}" class="d-inline"> <i class="fa fa-pencil mx-2"></i></a>
+                        </div>
+                        <div class="d-flex flex-column align-items-around">
+                            <p> {{description}} </p>
+                            <p> Units: {{stock}} - Price: ${{price}} </p>
+                        </div>
+                        <button type="submit" class="eliminar-orden justify-self-center align-self-center"
+                            data-id={{_id}}>
+                             Eliminar <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+
+                <h3 class="subtitle form_title mx-2 w-75 align-self-center">Bebidas:</h3>
+                {{#each items}}
+                {{#if (eq category "bebidas")}}
+                <div class="lista-pedido form m-2 p-3 w-25">
+                    <div class="card-body d-flex flex-column w-100 h-100 justify-content-between align-items-center">
+                        <div
+                            class="mb-2 pb-3 w-100 h-25 justify-content-between align-items-end border-bottom border-dark rounded">
+                            <h4 class="card-title d-inline m-2">{{name}}</h4>
+                            <a href="/edit-product/{{_id}}" class="d-inline"> <i class="fa fa-pencil mx-2"></i></a>
+                        </div>
+                        <div class="d-flex flex-column align-items-around">
+                            <p> {{description}} </p>
+                            <p> Units: {{stock}} - ${{price}} </p>
+                        </div>
+                        <button type="submit" class="eliminar-orden justify-self-center align-self-center"
+                            data-id={{_id}}>
+                            Eliminar <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</article>

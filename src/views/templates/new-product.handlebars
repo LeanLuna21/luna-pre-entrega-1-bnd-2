@@ -1,0 +1,50 @@
+{{>navigation}}
+<div class="form_container my-5">
+    <form class="form mt-5" action="/add-product/" method="post">
+        <h2 class="subtitle form_title">Agregar Producto:</h2>
+        <div class="form_group">
+            <input type="text" id="title" name="title" class="form_input" value="" placeholder=" " required>
+            <label class="form_label" for="title">Nombre del producto:</label>
+        </div>
+        <div class="form_group">
+            <select class="form-control form_input" name="type" id="type" value="" placeholder=" " required>
+                <option class="text-warning bg-dark">comidas</option>
+                <option class="text-warning bg-dark">bebidas</option>
+            </select>
+            <label class="form_label" for="type">Tipo:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="category" name="category" class="form_input" value="" placeholder=" " required>
+            <label class="form_label" for="category">Cateogria: </label>
+        </div>
+        <div class="form_group">
+            <textarea id="description" name="description" class="form_input"
+                placeholder=" "> </textarea>
+            <label class="form_label" for="description">Description:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="code" name="code" class="form_input" value="" placeholder=" " required>
+            <label class="form_label" for="code">Code:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="price" name="price" class="form_input" value="" placeholder=" ">
+            <label class="form_label" for="price">Precio:</label>
+        </div>
+        <div class="form_group">
+            <input type="text" id="stock" name="stock" class="form_input" value="" placeholder=" ">
+            <label class="form_label" for="stock">Stock:</label>
+        </div>
+        {{!-- <div class="form_group">
+            <input type="file" id="img" name="img" class="form_input" value="{{producto.img}}" placeholder=" ">
+            <label class="form_label" for="img">Subir Imagen:</label>
+        </div> --}}
+        <div class="my-3 w-100 d-flex align-items-center justify-content-evenly">
+            <button type="submit" class="save-button w-25 justify-self-center align-self-center">
+                Guardar
+            </button>
+            <a href="/" class="cancel-button w-25 justify-self-center align-self-center">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
