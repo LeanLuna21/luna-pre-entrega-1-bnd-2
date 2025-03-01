@@ -1,2 +1,4 @@
 node_modules 
 server-create.bat
+tex.txt
+src/utils/safe.js

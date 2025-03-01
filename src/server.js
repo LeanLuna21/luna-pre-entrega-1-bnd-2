@@ -1,3 +1,5 @@
+import { MongoURLpass } from "./utils/safe.js"
+
 import viewsRouter from "./routes/viewsRoutes.js"
 import productsRouter from "./routes/productsRoutes.js"
 import cartsRouter from "./routes/cartsRoutes.js"
@@ -31,7 +33,7 @@ app.use(session({
     //retries: Cantidad de veces que el servidor va a intentar leer ese archivo
     //store: new fileStorage({path: './src/sessions', ttl: 10, retries: 1 }),
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://lea21luna:LXhtn7QUYeOGDQbZ@cluster0.0rub3.mongodb.net/",
+        mongoUrl: "mongodb+srv://lea21luna:"+MongoURLpass+"@cluster0.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
         mongoOptions: {},
         ttl: 15
     }),
@@ -45,7 +47,7 @@ app.set("view engine", "handlebars")
 app.set("views", __dirname + "\\views")
 app.use(express.static(__dirname + '\\public'))
 
-mongoose.connect("mongodb+srv://lea21luna:viG9w8B9b1di1ei8@cluster0.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://lea21luna:"+MongoURLpass+"@cluster0.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => console.log("DB is ONLINE...!!!"))
 .catch((e) => console.log("Error al conectarme a DB:", e))
 
