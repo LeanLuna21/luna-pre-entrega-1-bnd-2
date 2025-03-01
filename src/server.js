@@ -45,7 +45,7 @@ app.set("view engine", "handlebars")
 app.set("views", __dirname + "\\views")
 app.use(express.static(__dirname + '\\public'))
 
-mongoose.connect("mongodb+srv://.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://lea21luna:viG9w8B9b1di1ei8@cluster0.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() => console.log("DB is ONLINE...!!!"))
 .catch((e) => console.log("Error al conectarme a DB:", e))
 

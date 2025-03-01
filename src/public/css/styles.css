@@ -109,11 +109,14 @@ body {
   transition: 0.3s;
   width: 40%;
 }
-
-.menu-card-info button:hover, .save-button:hover {
+.menu-card-info a button{
+  width: 100%;
+}
+.menu-card-info button:hover, .save-button:hover, a:has(.add-to-cart):hover {
   background-color: #191919;
   color: #eee;
   box-shadow: 1px 1px 5px #474747;
+  border-radius: 0.8rem;
 }
 
 .menu-options .price-button {
@@ -121,6 +124,12 @@ body {
   width: 100%;
   align-items: center !important;
   justify-content: space-around;
+}
+
+a:has(.add-to-cart){
+  text-decoration: none;
+  color: #191919;
+  width: 50%;
 }
 
 /* css headings & carrito */

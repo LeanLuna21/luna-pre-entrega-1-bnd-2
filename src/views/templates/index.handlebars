@@ -73,7 +73,11 @@
                             <button class="add-to-cart"><a href="/edit-product/{{_id}}" class="d-inline"> <i
                                     class="fa fa-pencil mx-2"></i></a></button>
                             {{else}}
-                            <button class="add-to-cart" data-id={{this._id}}>Agregar</button>
+                                {{#if ../user}}
+                                <button class="add-to-cart" data-id={{this._id}}>Agregar</button>
+                                {{else}}
+                                <a href="/login"><button class="add-to-cart">Agregar</button></a>
+                                {{/if}}
                             {{/if}}
                         </div>
                     </div>

@@ -26,10 +26,6 @@ function botonAgregarEventListeners() {
 }
 
 function eventoAgregarAlCarrito(event) {
-    // recupera el id de la opcion a donde se dispare el evento
-    const optionMenuID = event.target.getAttribute("data-id")
-    // lo agregamos al carrito
-    addToCart(optionMenuID)
     // agregamos efecto usando la libreria Toastify
     Toastify({
         text: "¡Orden agregada!",
@@ -260,10 +256,10 @@ function addOrderToHistory() {
 }
 
 function showAlert() {
-    setTimeout(() => {swal("Pedido recibido. Recibirá un mensaje de wpp a la brevedad.")}, 2000)
+    setTimeout(() => { swal("Pedido recibido. Recibirá un mensaje de wpp a la brevedad.") }, 2000)
     swal("Su pedido esta siendo procesado...")
-    
+
 }
 
 
-// botonAgregarEventListeners()
+botonAgregarEventListeners()
