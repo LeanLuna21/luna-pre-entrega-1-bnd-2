@@ -48,6 +48,7 @@
                         Filtrar por...
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/">(todos)</a>
                         {{#each categories}}
                         <a class="dropdown-item" href="/?filter={{this}}">{{this}}</a>
                         {{/each}}
@@ -70,7 +71,7 @@
                         <div class="price-button">
                             <b>$ {{this.price}}</b>
                             {{#if ../admin}}
-                            <button class="add-to-cart"><a href="/edit-product/{{_id}}" class="d-inline"> <i
+                            <button class="add-to-cart"><a href="/edit-product/{{this._id}}" class="d-inline"> <i
                                     class="fa fa-pencil mx-2"></i></a></button>
                             {{else}}
                                 {{#if ../user}}

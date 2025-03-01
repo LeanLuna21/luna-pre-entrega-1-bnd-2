@@ -35,7 +35,7 @@ app.use(session({
     store: MongoStore.create({
         mongoUrl: "mongodb+srv://lea21luna:"+MongoURLpass+"@cluster0.f1eza.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
         mongoOptions: {},
-        ttl: 15
+        ttl: 10800
     }),
     secret: 'SessionSecret',
     resave: true,

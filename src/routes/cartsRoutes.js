@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getCarts, getCartById, createCart, addOrderToCart, updateCartOrder, emptyCart, removeOrder} from "../controllers/cartsController.js";
+import { getCarts, getCartById, createCart, addOrderToCart, updateCartOrder, emptyCart, removeOrder, checkout} from "../controllers/cartsController.js";
 import { authorization } from "../config/middlewares.js";
 
 const cartsRouter = Router()
@@ -11,6 +11,9 @@ cartsRouter.post("/:cid/product/:pid", authorization("user"), addOrderToCart)
 cartsRouter.put("/:cid/product/:pid", authorization("user"), updateCartOrder)
 cartsRouter.delete("/:cid", authorization("user"), emptyCart)
 cartsRouter.delete("/:cid/product/:pid", authorization("user"), removeOrder)
+
+// user cart checkout
+cartsRouter.post('/:cid/checkout', checkout)
 
 
 export default cartsRouter

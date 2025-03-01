@@ -1,5 +1,6 @@
 import cartModel from "../models/cartsModel.js";
 import itemModel from "../models/productsModel.js";
+import ticketModel from '../models/ticketModel.js';
 import { isValidObjectId } from 'mongoose';
 
 // list all carts
@@ -64,7 +65,8 @@ export const addOrderToCart = async (req, res) => {
     }
 
     try {
-        // let { quantity } = req.body
+        let { quantity } = req.body
+        console.log(quantity);
         let cart = await cartModel.findById(cartId)
         if (!cart) {
             return res.status(404).send({ ERROR: `cart id ${cid} NOT FOUND.` })
@@ -76,8 +78,8 @@ export const addOrderToCart = async (req, res) => {
 
         if (cart.products.find(prod => prod.product.equals(product._id))) {
             cart.products.forEach(prod => {
-                if (prod.product.equals(product._id)) {
-                    ++prod.quantity
+                if (prod.product.equals(product._id))   {
+                    quantity ? prod.quantity = quantity : ++prod.quantity
                 }
             })
         }
@@ -85,7 +87,7 @@ export const addOrderToCart = async (req, res) => {
             cart.products.push(
                 {
                     product: product._id,
-                    quantity:  1
+                    quantity:  quantity
                 }
             )
         }
@@ -199,5 +201,66 @@ export const removeOrder = async (req, res) => {
     } catch (err) {
         res.setHeader('Content-Type', 'application/json');
         return res.status(500).send({ error: `${err.message}` })
+    }
+}
+
+
+// user cart managament
+export const checkout = async (req, res) => {
+    try {
+        let cartId = req.params.cid
+        let cart = await cartModel.findById(cartId).populate({ path: "products.product" }).lean()
+        let prodsOutOfStock = []
+        if(cart) {
+            // check selected items stock is enough:
+            for(let prod of cart.products) {
+                let producto = await itemModel.findById(prod.product)
+                if(producto.stock - prod.quantity < 0) {
+                    prodsOutOfStock.push(producto._id)
+                }
+            }
+
+            if(prodsOutOfStock.length === 0) { //if list is empty => all products stock is enough
+                
+                // total de la compra
+                let totalPrice = 0;
+    
+                for (let prod of cart.products) { // restamos el stock y agregamos precio al total
+                    let producto = await itemModel.findById(prod.product);
+                    if (producto) {
+                        producto.stock -= prod.quantity;
+                        totalPrice += producto.price * prod.quantity;
+                        await producto.save();
+                    }
+                }
+            
+                // creamos orden de compra
+                let newTicket = await ticketModel.create({
+                    code: crypto.randomUUID(),
+                    purchaser: req.user.email,
+                    amount: totalPrice,
+                    products: cart.products
+                });
+
+                // vaciamos el carrito completada la operacion
+                await cartModel.findByIdAndUpdate(cartId, { products: []})
+                res.status(200).send(newTicket)
+            } else {
+                // Saco del carrito todos los productos sin stock
+                prodsOutOfStock.forEach((prodId) => {
+                    let indice = cart.products.findIndex(prod => prod.id == prodId)
+                    cart.products.splice(indice,1)
+                    // cart.products = cart.products.filter(pro => pro.id_prod !== prodId)
+                })
+                await cartModel.findByIdAndUpdate(cartId, {
+                    products: cart.products
+                })
+                res.status(400).send({message: "Oops stock no diponible o suficiente: ", products:prodsOutOfStock})
+            }
+        } else {
+            res.status(404).send({message: "Carrito no existe"})
+        }
+    } catch (e) {
+        res.status(500).send({message:e.message})
     }
 }
